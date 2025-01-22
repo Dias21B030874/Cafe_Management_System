@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Delete</title>
+</head>
+<body>
+    <h1>Are you sure you want to delete this order?</h1>
+    <p>Order ID: {{ order.id }}</p>
+    <p>Table Number: {{ order.table_number }}</p>
+    <p>Total Price: {{ order.total_price }}</p>
+    <p>Status: {{ order.get_status_display }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete</button>
+        <a href="{% url 'order_list' %}">Cancel</a>
+    </form>
+</body>
+</html>

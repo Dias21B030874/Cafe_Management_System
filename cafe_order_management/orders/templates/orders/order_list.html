@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order List</title>
+</head>
+<form method="get">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search by table or status">
+    <button type="submit">Search</button>
+</form>
+<body>
+    <h1>Order List</h1>
+    <a href="{% url 'order_create' %}">Create New Order</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Table Number</th>
+                <th>Items</th>
+                <th>Total Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.table_number }}</td>
+                <td>{{ order.items }}</td>
+                <td>{{ order.total_price }}</td>
+                <td>{{ order.get_status_display }}</td>
+                <td>
+                    <a href="{% url 'order_update' order.id %}">Edit</a>
+                    <a href="{% url 'order_delete' order.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'calculate_revenue' %}">Calculate Revenue</a>
+</body>
+</html>
